@@ -1,0 +1,232 @@
+.box {
+    background-color: rgb(2, 2, 18);
+    background-size: 100vw;
+    /* animation: home 0.5s ease-in-out; */
+}
+
+@keyframes home {
+    from {
+        opacity: 0;
+        scale: 0.5;
+    }
+
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+.box1 {
+    background-size: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    /* Show one full image centered, then fill leftover space with lavender */
+
+    background: url("/background.png") center/contain no-repeat rgb(2, 2, 18);
+    top: 0;
+
+}
+
+.title {
+    color: white;
+    font-size: 60px;
+    font-weight: 700;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.disc {
+    text-align: center;
+    padding: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.box2 {
+    background-color: lavender;
+
+    background-size: 100vw;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    flex-direction: column;
+    height: auto;
+    border-radius: 50px 50px 0px 0px;
+    position: sticky;
+    top: 0;
+}
+
+.title2 {
+    color: rgb(66, 10, 87);
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 10px;
+    margin-left: 10px;
+    text-align: left;
+    display: flex;
+
+}
+
+.searchInput {
+    width: 90vw;
+    padding: 10px;
+    margin: 20px auto;
+    border: 2px solid #826996;
+    border-radius: 20px;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.search {
+    display: flex;
+    align-items: center;
+    position: sticky;
+}
+
+
+.poemCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 45vw;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.poems {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+}
+
+.my-masonry-grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: -16px;
+    /* gap size */
+    width: auto;
+}
+
+.my-masonry-grid_column {
+    padding-left: 16px;
+    /* gap size */
+}
+
+.poemTitle {
+    font-size: 20px;
+    font-weight: 700;
+    color: rgb(66, 10, 87);
+    text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.pImg {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.header {
+    position: sticky;
+    border-radius: 25px 25px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    background-color: lavender;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        scale: 0.5;
+        /* clip-path: inset(100% 100% 0 0); */
+    }
+
+    to {
+        opacity: 1;
+        scale: 1;
+        /* clip-path: inset(0 0 0 0); */
+    }
+}
+
+.poemCard {
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 33%;
+}
+
+.searchResults {
+    width: 90vw;
+    /* padding: 20px; */
+    align-self: center;
+    border: 2px solid #826996;
+    border-radius: 20px;
+    font-size: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: left;
+    animation: searchAppear 0.5s ease-in-out;
+}
+
+@keyframes searchAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.searchItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0 8px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f9f9f9;
+    color: #333;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+}
