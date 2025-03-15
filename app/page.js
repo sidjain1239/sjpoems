@@ -43,16 +43,25 @@ const navigate = useRouter();
 const poemClick = (id) => () => {
     navigate.push(`/${id}`);
   }
+
+  const texts = [ "/bgimages/s1.jpg", "/bgimages/s2.jpg", "/bgimages/s3.jpg"];
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTextIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 3000); // Change text every 3 seconds
+    return () => clearInterval(interval);
+  }, [texts.length]);
+
   return (
     <>
       <div className="flex justify-between w-full m-0 flex-col">
         <div className="box">
-          <div className="box1">
-            <div className="title">Poems <br /> By <br />Soumya Jain</div>
-            <div className="disc">
-              Myself Soumya Jain. I am 16 right now...
-              I hope you will enjoy reading my Write ups.<br />
-              Thank you
+        <div className="box1">
+            <div className="images">
+              <div className="image-text">Soumya Jain</div>
+              <img src={texts[currentTextIndex]} alt="" className="image" />
+              <img src={texts[currentTextIndex]} alt="" className="imgbackground" />
             </div>
           </div>
 
@@ -76,7 +85,7 @@ const poemClick = (id) => () => {
                     <div className="searchItem">No results found</div>
                   ) : (
                     filteredPoems.map((poem) => (
-                      <div key={poem.id} className="searchItem">
+                      <div key={poem.id} className="searchItem" onClick={poemClick(poem.id)}> 
                         {poem.title}
                       </div>
                     ))
@@ -84,7 +93,9 @@ const poemClick = (id) => () => {
                 </div>
               )}
             </div>
-
+             { (poems.length == 0) ? (
+                <div className="loading">Loading</div>
+              ) : (
             <div className="poems">
               <Masonry
                 breakpointCols={breakpointColumnsObj}
@@ -101,6 +112,7 @@ const poemClick = (id) => () => {
                 ))}
               </Masonry>
             </div>
+              )}
           </div>
         </div>
       </div>

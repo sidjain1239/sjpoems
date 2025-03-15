@@ -57,7 +57,7 @@ export default function UploadImage() {
   
   return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <h1>Upload poem</h1>
       <label>Title</label>
       <input type="text" className={styles.title} {...register('title')} />

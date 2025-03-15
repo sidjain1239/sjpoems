@@ -37,8 +37,9 @@ const Page = () => {
     if (navigator.share) {
       navigator.share({
         title: poemData.title,
-        text: 'Check out this poem!',
+        text: `Read this poem by Soumya Jain on ${poemData.title}`,
         url: window.location.href,
+        files: [poemData.filename]
       })
       .then(() => console.log('Successful share'))
       .catch((error) => console.error('Error sharing', error));
@@ -46,7 +47,11 @@ const Page = () => {
       console.error('Web Share API not supported in this browser');
     }
   };
-
+  useEffect(() => {
+    if (poemData) {
+      document.title = poemData.title;
+    }
+  }, [poemData]);
   return (
     <div className="flex justify-between w-full m-0 flex-col">
       <div className={styles.pBox}>
