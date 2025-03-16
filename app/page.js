@@ -44,7 +44,7 @@ const poemClick = (id) => () => {
     navigate.push(`/${id}`);
   }
 
-  const texts = [ "/bgimages/s1.jpg", "/bgimages/s2.jpg", "/bgimages/s3.jpg"];
+  const texts = [ "/bgimages/s1.jpg", "/bgimages/s2.jpg", "/bgimages/s3.jpg", "/bgimages/s4.jpg", "/bgimages/s5.jpg", "/bgimages/s6.jpg", "/bgimages/s7.jpg"];
   const [currentTextIndex, setCurrentTextIndex] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {

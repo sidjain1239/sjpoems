@@ -1,7 +1,9 @@
 .box {
     background-color: rgb(2, 2, 18);
     background-size: 100vw;
-    /* animation: home 0.5s ease-in-out; */
+    animation: appear 0.5s ;
+    margin: 0;
+    padding: 0;
 }
 @keyframes home {
     from {
@@ -288,12 +290,12 @@
     font-size: 40px;
     font-weight: bold;
     animation: colorChange 3s infinite;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5);
 }
 
 @keyframes colorChange {
     0% {
-        color: lavender;
+        color: rgb(233, 225, 170);
     }
     25% {
         color: #d0b090;
@@ -306,7 +308,7 @@
         color: #f0e0b0;
     }
     100% {
-        color: lavender;
+        color: rgb(223, 208, 165);
     }
 }
 
@@ -319,8 +321,8 @@
     top: 0;
     z-index: 0;
     animation: fade 3s infinite;
-    object-fit: cover;
-
+    object-fit:fill;
+    height: 100%;
     width: 100vw;
     filter: blur(10px) brightness(0.8);
 
