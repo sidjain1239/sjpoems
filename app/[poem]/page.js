@@ -24,6 +24,7 @@ const Page = () => {
         .then((response) => {
           setPoemData(response.data);
           setLikes(response.data.likes);
+          document.title = `${poemData.title} by Soumya Jain`;
         })
         .catch((error) => {
           console.error("There was an error!", error);
