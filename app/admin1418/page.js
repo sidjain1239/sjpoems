@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styles from "./Admin.module.css"
 import { UploadMongo } from './backend/mongo';
+import { UploadVMongo } from './backend/vmongo';
 
 export default function UploadImage() {
   const { register, handleSubmit } = useForm();
@@ -14,65 +15,113 @@ export default function UploadImage() {
     setIsSubmitting(true)
     setSuccess("")
     setErr("")
-    try{
-    if (!data.file?.[0]) return;
+    try {
+      if (!data.file?.[0]) return;
 
-    const formData = new FormData();
-    formData.append('file', data.file[0]);
-    formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UNSIGNED_UPLOAD_PRESET);
+      const formData = new FormData();
+      formData.append('file', data.file[0]);
+      formData.append('upload_preset', process.env.NEXT_PUBLIC_CLOUDINARY_UNSIGNED_UPLOAD_PRESET);
 
-    const res = await fetch(
-      `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    );
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/upload`,
+        {
+          method: 'POST',
+          body: formData,
+        }
+      );
 
-    const result = await res.json();
-    console.log(result.secure_url);
-    const image = result.secure_url;
-    const title = data.title;
+      const result = await res.json();
+      console.log(result.secure_url);
+      const image = result.secure_url;
+      const title = data.title;
 
-    
-      await UploadMongo(title,image)
+
+      await UploadMongo(title, image)
         .then((response) => {
           if (response.value) {
             setSuccess("Uploaded Successfully.")
             setIsSubmitting(false)
-          
+
           } else {
             setErr("Error. Please try again")
             setIsSubmitting(false)
           }
         })
-    
-  }
-  catch(err){
-    console.log(err)
-    setErr("Server Error. Please try again")
-    setIsSubmitting(false)
-  }
+
+    }
+    catch (err) {
+      console.log(err)
+      setErr("Server Error. Please try again")
+      setIsSubmitting(false)
+    }
   };
-  
+const onVideoSubmit = async (data) => {
+    setIsSubmitting(true)
+    setSuccess("")
+    setErr("")
+    try {
+      const title = data.title;
+      const ytlink = data.ytlink;
+      await UploadVMongo(title, ytlink)
+        .then((response) => {
+          if (response.value) {
+            setSuccess("Uploaded Successfully.")
+            setIsSubmitting(false)
+
+          } else {
+            setErr("Error. Please try again")
+            setIsSubmitting(false)
+          }
+        })
+
+    }
+    catch (err) {
+      console.log(err)
+      setErr("Server Error. Please try again")
+      setIsSubmitting(false)
+    }
+  }
   return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <h1>Upload poem</h1>
-      <label>Title</label>
-      <input type="text" className={styles.title} {...register('title')} />
-      <br />
-      
-      <label>File</label>
-      <input type="file" {...register('file')} />
-      <button type="submit">Upload</button>
-{isSubmitting ? <div className={styles.loader}></div> : <input type="submit" className={styles.button} value="Submit Credentials" />}
-    </form>
-    <div className="flex justify-center items-center flex-col">
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
+        <h1>Upload poem</h1>
+        <label>Title</label>
+        <input type="text" className={styles.title} {...register('title')} />
+        <br />
 
-<div className={styles.error}>{Err}</div>
-<div className={styles.success}>{Success}</div>
-</div>
+        <label>File</label>
+        <input type="file" {...register('file')} />
+        {/* <button type="submit">Upload</button> */}
+        {isSubmitting ? <div className={styles.loader}></div> : <input type="submit" className={styles.button} value="Submit Credentials" />}
+      </form>
+      <div className="flex justify-center items-center flex-col">
+
+        <div className={styles.error}>{Err}</div>
+        <div className={styles.success}>{Success}</div>
+      </div>
+
+
+      
+      <div>
+        <form onSubmit={handleSubmit(onVideoSubmit)} className={styles.form}>
+          <h1>Upload Video</h1>
+          <label>Title</label>
+          <input type="text" className={styles.title} {...register('title')} />
+          <br />
+          <label>YT link</label>
+          <input type="text" className={styles.title} {...register('ytlink')} />
+          <br />
+
+          
+          {/* <button type="submit">Upload video</button> */}
+          {isSubmitting ? <div className={styles.loader}></div> : <input type="submit" className={styles.button} value="Submit Credentials" />}
+        </form>
+        <div className="flex justify-center items-center flex-col">
+
+          <div className={styles.error}>{Err}</div>
+          <div className={styles.success}>{Success}</div>
+        </div>
+      </div>
     </>
   );
 }
