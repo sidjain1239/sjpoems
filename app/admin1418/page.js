@@ -33,7 +33,7 @@ export default function UploadImage() {
       const result = await res.json();
       console.log(result.secure_url);
       const image = result.secure_url;
-      const title = data.title;
+      const title = data.titlep;
 
 
       await UploadMongo(title, image)
@@ -60,7 +60,7 @@ const onVideoSubmit = async (data) => {
     setSuccess("")
     setErr("")
     try {
-      const title = data.title;
+      const title = data.titley;
       const ytlink = data.ytlink;
       await UploadVMongo(title, ytlink)
         .then((response) => {
@@ -86,7 +86,7 @@ const onVideoSubmit = async (data) => {
       <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
         <h1>Upload poem</h1>
         <label>Title</label>
-        <input type="text" className={styles.title} {...register('title')} />
+        <input type="text" className={styles.title} {...register('titlep')} />
         <br />
 
         <label>File</label>
@@ -106,7 +106,7 @@ const onVideoSubmit = async (data) => {
         <form onSubmit={handleSubmit(onVideoSubmit)} className={styles.form}>
           <h1>Upload Video</h1>
           <label>Title</label>
-          <input type="text" className={styles.title} {...register('title')} />
+          <input type="text" className={styles.title} {...register('titley')} />
           <br />
           <label>YT link</label>
           <input type="text" className={styles.title} {...register('ytlink')} />
